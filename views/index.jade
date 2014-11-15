@@ -1,5 +1,46 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  nav#navbar
+    #brand
+      a(href="#") InstaParser
+    #buttons
+      a(href="#") learn
+      a(href="#") use
+      a(href="#") download
+      a(href="#") github
+
+  nav#sidebar
+    #section-selector
+    #subsection-selector
+    .item.active
+      a(href="#") Installations
+    .item
+      a(href="#") Usage
+    .item
+      a(href="#") Basic format
+    .item
+      a(href="#") &lt;head&gt; tag
+      //- ul
+      //-   li lorem
+      //-   li ipsum
+      //-   li possum
+    .item
+      a(href="#") &lt;objects&gt; tag
+    .item
+      a(href="#") &lt;body&gt; tag
+    .item
+      a(href="#") Examples
+
+  #container
+    #fakenavbar
+    #fakesidebar
+
+    #content
+      h1 Header
+      p Lorem Ipsum Possum Mossum more random content more more more more more more more more more
+      h2 SubHeader
+      p More shit
+
+
+
