@@ -1,0 +1,167 @@
+//=============================================================
+// Colors
+//=============================================================
+
+// Theme color
+@theme: rgb(31, 144, 255);
+// Dark and light theme colors
+@light: rgb(210, 233, 255);
+@dark: rgb(10, 27, 35);
+// Color for selected links
+@hover: rgb(70, 179, 4);
+// Gray color
+@gray: rgb(169, 197, 225);
+
+//=============================================================
+// Fonts
+//=============================================================
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url(fonts/HelveticaNeueLTPro-Roman.otf) format("opentype");
+}
+
+//=============================================================
+// Mixins
+//=============================================================
+
+.translateX(@amount) {
+  -webkit-transform: translateX(@amount);
+  transform: translateX(@amount);
+}
+
+//=============================================================
+// CSS
+//=============================================================
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#navbar {
+  width: 668px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+  position: fixed;
+  left: 50%;
+  .translateX(-50%);
+
+  background-color: white;
+  font-family: HelveticaNeue;
+
+  #brand {
+    display: inline-block;
+    a {
+      font-size: 50px;
+      color: @theme;
+    }
+  }
+
+  #buttons {
+    display: inline-block;
+
+    a {
+      padding-left: 25px;
+
+      font-size: 25px;
+      color: @dark;
+
+      &:hover {
+        color: @hover;
+      }
+    }
+  }
+}
+
+#sidebar {
+  position:fixed;
+  // Magic Number
+  top: 110px + 5px;
+  left: calc(~'50% + 250px');
+  width: 300px;
+
+  font-family: "Open Sans";
+  font-weight: 300;
+  font-size: 16px;
+
+  #section-selector, #subsection-selector {
+    width: 3px;
+    height: 22px;
+    background-color: @hover;
+    position: absolute;
+    top: 42px * 0;
+    left: -15px;
+  }
+
+  .item {
+    padding-bottom: 20px;
+    a {
+      color: @dark;
+      &:hover {
+        color: @hover;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .active a {
+    color: @hover;
+  }
+}
+
+#container {
+  width: 668px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+
+  #fakenavbar {
+    opacity: 0;
+    height: 110px;
+    visibility: hidden;
+  }
+
+  #fakesidebar {
+    float: right;
+    width: 84px;
+    height: 100%;
+    padding-left: 38px;
+  }
+}
+
+#content {
+  color: @dark;
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 15px;
+
+    font-family: "Open Sans";
+    font-weight: 300;
+    font-size: 30px;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: "Open Sans";
+    font-weight: 300;
+    font-size: 22px;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 22px;
+    font-family: "Open Sans";
+    font-weight: 300;
+    font-size: 16px;
+  }
+}
