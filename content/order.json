@@ -3,7 +3,16 @@
     {
       "name": "Installation",
       "filename": "installation.html",
-      "id": "installation"
+      "subsections": [
+        "First step"
+      ]
+    },
+    {
+      "name": "Usage",
+      "filename": "usage.html",
+      "subsections": [
+        "Second step"
+      ]
     }
   ]
 }

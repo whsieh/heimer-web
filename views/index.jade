@@ -7,21 +7,24 @@ block content
     #buttons
       a(href="#") use
       a(href="#") download
-      a(href="#") github
+      a(href="https://github.com/ImpGuard/heimer") github
 
   nav#sidebar
     #section-selector
     #subsection-selector
     each section in sections
-      .item.active
-        a(href= "#" + section.id)= section.name
+      .item
+        a(href= "#")= section.name
+        each subsectionName in section.subsections
+          .subitem
+            a(href= "#" style= "display: none")= subsectionName
 
   #container
     #fakenavbar
 
     #content
       each section in sections
-        .section(id= "#" + section.id)!= section.content
+        .section!= section.content
 
   #footer
 

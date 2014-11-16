@@ -8,12 +8,22 @@ var order = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content", 'o
 var sections = [];
 
 order.files.forEach(function(file) {
+    if (!("name" in file || "filename" in file)) {
+        console.log("Missing name or filename in order.json");
+    }
+
     var name = file.name;
     var filename = file.filename;
-    var id = file.id;
+    var subsections;
+    if ("subsections" in file) {
+        var subsections = file.subsections;
+    } else {
+        var subsections = [];
+    }
+
     var content = fs.readFileSync(path.join(__dirname, "../", "content", filename), "utf8");
 
-    sections.push({ id: id, name: name, content: content });
+    sections.push({ name: name, content: content, subsections: subsections });
 });
 
 // sections.forEach(function(section){

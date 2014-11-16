@@ -101,12 +101,24 @@ a {
   }
 
   .item {
-    padding-bottom: 20px;
+    margin-bottom: 20px;
     a {
       color: @dark;
       &:hover {
         color: @hover;
         text-decoration: underline;
+      }
+    }
+
+    .subitem {
+      margin-top: 15px;
+      padding-left: 15px;
+      a {
+        color: @dark;
+        &:hover {
+          color: @hover;
+          text-decoration: underline;
+        }
       }
     }
   }
