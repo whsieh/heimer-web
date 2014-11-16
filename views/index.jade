@@ -6,18 +6,19 @@ block content
       a(href="#") InstaParser
     #buttons
       a(href="#") use
-      a(href="#") download
+      a(href="https://raw.githubusercontent.com/impguard/heimer/master/instaparse.py" download) download
       a(href="https://github.com/ImpGuard/heimer") github
 
   nav#sidebar
-    #section-selector
-    #subsection-selector
     each section in sections
       .item
         a(href= "#")= section.name
-        each subsectionName in section.subsections
-          .subitem
-            a(href= "#" style= "display: none")= subsectionName
+        div.subitems(style="display: none")
+          each subsectionName in section.subsections
+            .subitem
+              a(href= "#")= subsectionName
+    #section-selector
+    #subsection-selector
 
   #container
     #fakenavbar
