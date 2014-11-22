@@ -3,11 +3,17 @@ extends layout
 block content
   nav#navbar
     #brand
-      a(href="#") Instaparse
+      a(href="#") InstaParse
     #buttons
-      a(href="#") use
-      a(href="https://raw.githubusercontent.com/impguard/heimer/master/instaparse.py" download) download
-      a(href="https://github.com/ImpGuard/heimer") github
+      a#use(href="#") use
+      a#download(href="https://github.com/ImpGuard/instaparse/releases/download/0.9.0/instaparse.py" download) download
+      a#github(href="https://github.com/ImpGuard/heimer") github
+    #download-popup
+      p Click to download the script
+    #github-popup
+      p Leaving to github.com/ImpGuard/heimer
+    #use-popup
+      p Use instaparse now!
 
   nav#sidebar
     each section in sections

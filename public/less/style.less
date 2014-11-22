@@ -30,6 +30,21 @@
   transform: translateX(@amount);
 }
 
+.border-radius(@amount) {
+  -webkit-border-radius:@amount;
+  -moz-border-radius:@amount;
+  border-radius:@amount;
+}
+
+//=============================================================
+// Sizing Variables
+//=============================================================
+
+@width: 850px;
+@nav-padding-top: 25px;
+@nav-padding-bottom: 33px;
+@nav-height: 60px + @nav-padding-top + @nav-padding-bottom;
+
 //=============================================================
 // CSS
 //=============================================================
@@ -44,10 +59,14 @@ a {
   text-decoration: none;
 }
 
+.theme {
+  color: @theme;
+}
+
 #navbar {
-  width: 668px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  width: @width;
+  padding-top: @nav-padding-top;
+  padding-bottom: @nav-padding-bottom;
 
   position: fixed;
   left: 50%;
@@ -78,13 +97,84 @@ a {
       }
     }
   }
+
+  #download-popup, #github-popup, #use-popup {
+    position:absolute;
+    top: 85px - 10px; left: 0;
+    padding: 6px 25px;
+    border:1px solid @hover;
+    color: @dark;
+    .border-radius(10px);
+
+    &:before {
+      content:"";
+      // Position at top of the box
+      position:absolute;
+      top: -7px;
+      left: 200px;
+      // Draw triangle
+      border-width: 0 8px 7px;
+      border-style: solid;
+      border-color: @hover transparent;
+      /* reduce the damage in FF3.0 */
+      display:block;
+      width:0;
+    }
+
+    &:after {
+      content: "";
+      // Position at the top of the box
+      position: absolute;
+      top: -6px;
+      left: 201px;
+      // Draw triangle
+      border-width: 0 7px 6px;
+      border-style: solid;
+      border-color: white transparent;
+      /* reduce the damage in FF3.0 */
+      display:block;
+      width:0;
+    }
+
+    p {
+      margin: 0;
+      padding-top: 1px;
+      font-family: "Open Sans";
+      font-weight: 300;
+      font-size: 16px;
+    }
+  }
+
+  #download-popup {
+    left: 225px;
+    &:before {
+      left: 140px;
+    }
+    &:after {
+      left: 141px;
+    }
+  }
+
+  #github-popup {
+    left: 285px;
+  }
+
+  #use-popup {
+    left: 160px;
+    &:before {
+      left: 110px;
+    }
+    &:after {
+      left: 111px;
+    }
+  }
 }
 
 #sidebar {
   position:fixed;
   // Magic Number
-  top: 110px + 5px;
-  left: calc(~'50% + 250px');
+  top: @nav-height + 5px;
+  left: calc(~'50% +' @width/2 - 84);
   width: 300px;
 
   font-family: "Open Sans";
@@ -134,13 +224,13 @@ a {
 }
 
 #container {
-  width: 668px;
+  width: @width;
   margin: 0 auto;
   padding: 0;
 
   #fakenavbar {
     opacity: 0;
-    height: 110px;
+    height: @nav-height;
     visibility: hidden;
   }
 }
@@ -148,7 +238,7 @@ a {
 #content {
   color: @dark;
   // Removing the sidebar space.
-  width: 668px - 84px - 38px;
+  width: @width - 84px - 38px;
 
   h1 {
     margin-top: 0;

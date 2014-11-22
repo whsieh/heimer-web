@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Magic number adds some leeway
+    // Offset the navbar height
     var topOffset = $("#navbar").innerHeight();
 
     // Establish section-subsection pairings
@@ -46,7 +46,6 @@ $(document).ready(function() {
 
         // Center selector with the associated navigation item (magic number from css)
         var selectorOffset = ($("#section-selector").height() - $("#sidebar").find("a").height()) / 2;
-        console.log($("#sidebar").find("a").height());
 
         if (!prevSection.is(section)) {
             // If section changes, show new items

@@ -33,7 +33,7 @@ order.files.forEach(function(file) {
 
 /* GET home page. */
 router.get("/", function(req, res) {
-  res.render("index", { title: "InstaParser", sections: sections });
+  res.render("index", { title: "InstaParse", sections: sections });
 });
 
 module.exports = router;
