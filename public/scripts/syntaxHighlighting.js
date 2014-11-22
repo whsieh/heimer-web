@@ -22,4 +22,11 @@ $(document).ready(function() {
         },
         "keyword": /delimiter/
     };
+
+    // Trim all initial code blocks
+    var str;
+    $("pre code").each(function(index, element) {
+        str = $(element).html();
+        $(element).html($.trim(str));
+    })
 });
