@@ -1,5 +1,5 @@
 Theme: 31, 144, 255
-Dark: 10, 27, 35
+Dark: 10, 27, 45
 Selected (Green): 70, 179, 4
 
 Links: 90, 28, 72
