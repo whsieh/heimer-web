@@ -2,21 +2,23 @@ doctype html
 html
   head
     title= title
+
+    //- Stylesheets
+    link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Open+Sans:300")
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css")
+    link(rel="stylesheet", href="styles/prism.css")
+    link(rel="stylesheet", href="style.css")
     //- Jquery
     script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
     script(src="scripts/waypoints.min.js")
     //- Underscore
     script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
-    //- Highlightjs
-    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js")
+    //- Prismjs
+    script(src="scripts/prism.js")
     //- Custom Scripts
-    script(src="scripts/configurehljs.js")
+    script(src="scripts/configureprism.js")
     script(src="scripts/sidenav.js")
     script(src="scripts/nav.js")
 
-    //- Stylesheets
-    link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Open+Sans:300")
-    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css")
-    link(rel="stylesheet", href="style.css")
-  body
+  body.language-instaparse
     block content

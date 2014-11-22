@@ -20,7 +20,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(expressLess(path.join(__dirname, 'public', 'less')));
+app.use(expressLess(path.join(__dirname, 'public', 'styles')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
