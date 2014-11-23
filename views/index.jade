@@ -19,7 +19,7 @@ block content
     each section in sections
       .item
         a(href= "#")= section.name
-        div.subitems(style="display: none")
+        .subitems(style="display: none")
           each subsectionName in section.subsections
             .subitem
               a(href= "#")= subsectionName
@@ -34,5 +34,29 @@ block content
         .section!= section.content
 
   #footer
+
+  #editor
+    #code-panel
+      nav
+        #language.borderBox.tab 
+          .dropdown Java
+          .subitems
+            .subitem C++
+            .subitem Python
+        #template.borderBox
+          select
+            option(value="one") Option 1
+            option(value="two") Option 2
+            option(value="three") Option 3
+            option(value="four") Option 4
+          .arrow
+
+        #compile.borderBox.tab Compile
+      .content.borderBox
+
+    #output-panel
+      nav
+        #downloadOutput.borderBox.tab Download
+      .content.borderBox
 
 
