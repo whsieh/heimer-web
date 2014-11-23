@@ -15,9 +15,10 @@ html
     script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
     //- Prismjs
     script(src="scripts/prism.js")
-    //- Global Values
+    //- Intialization and global values
     script.
-      GLOBALS = !{JSON.stringify(globals)};
+      window.export = {};
+      window.export.globals = !{JSON.stringify(globals)};
     //- Custom Scripts
     script(src="scripts/syntaxHighlighting.js")
     script(src="scripts/editor.js")

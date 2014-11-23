@@ -13,12 +13,12 @@ $(document).ready(function() {
         toggleScroll();
     }
 
-    window.toggleEditor = toggleEditor;
+    window.export.toggleEditor = toggleEditor;
 
     $(window).keypress(function(e) {
         var code = e.keyCode || e.which;
         if (code == 101) {
-            window.toggleEditor();
+            window.export.toggleEditor();
         }
     });
 });

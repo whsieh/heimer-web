@@ -16,8 +16,7 @@ $(document).ready(function() {
 
     // Use button click
     $("#use").click(function (e) {
-        window.toggleEditor();
-        
+        window.export.toggleEditor();
         return false;
     });
 
