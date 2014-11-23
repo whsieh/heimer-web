@@ -303,7 +303,7 @@ pre {
 // Editor
 //-------------------------------------------------------------
 
-// Simple helper mixin for toggling hover
+// Handle hovering universally
 .onHover {
   &:hover {
     cursor: pointer;
@@ -340,6 +340,8 @@ pre {
     font-size: 16px;
 
     .tab {
+      position: absolute;
+      box-sizing: border-box;
       width: 100px;
       height: 37px;
       border: 2px solid @gray;
@@ -388,7 +390,6 @@ pre {
 
 #code-panel {
   nav #compile {
-    position: absolute;
     right: 0; top: 0;
     background-color: @dark;
     color: @light;
@@ -396,7 +397,6 @@ pre {
   }
 
   nav #language {
-    position: absolute;
     left: 0; top: 0;
     background-color: @gray;
     color: @dark;
@@ -440,7 +440,6 @@ pre {
 
 #output-panel {
   nav #downloadOutput {
-    position: absolute;
     right: 0; top: 0;
     background-color: @dark;
     color: @light;

@@ -38,11 +38,12 @@ block content
   #editor
     #code-panel
       nav
-        #language.borderBox.tab 
-          .dropdown Java
+        #language.tab
+          .dropdown= languages[0]
           .subitems
-            .subitem C++
-            .subitem Python
+            each language, index in languages
+              if (index !== 0)
+                .subitem= language
         #template.borderBox
           select
             option(value="one") Option 1
@@ -51,12 +52,12 @@ block content
             option(value="four") Option 4
           .arrow
 
-        #compile.borderBox.tab Compile
+        #compile.tab Compile
       .content.borderBox
 
     #output-panel
       nav
-        #downloadOutput.borderBox.tab Download
+        #downloadOutput.tab Download
       .content.borderBox
 
 

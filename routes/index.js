@@ -4,7 +4,9 @@ var router = express.Router();
 var path = require("path");
 var fs = require("fs");
 
-var order = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content", 'order.json')));
+
+// Grab the sections to automatically generate the navigation
+var order = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content", "order.json")));
 var sections = [];
 
 order.files.forEach(function(file) {
@@ -26,14 +28,15 @@ order.files.forEach(function(file) {
     sections.push({ name: name, content: content, subsections: subsections });
 });
 
-// sections.forEach(function(section){
-//     console.log(section.id);
-//     console.log(section.content);
-// });
+// Grab languages to generate the editor
+var languages = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content", "languages.json"))).languages;
+
+// Setup global variables to pass to the client
+var globals = {languages: languages};
 
 /* GET home page. */
 router.get("/", function(req, res) {
-  res.render("index", { title: "InstaParse", sections: sections });
+  res.render("index", { title: "InstaParse", sections: sections, languages: languages, globals: globals });
 });
 
 module.exports = router;
