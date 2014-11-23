@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
     // Offset the navbar height
     var topOffset = $("#navbar").innerHeight();
 

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
     var isEditorOpen = false;
     var toggleScroll = function() {
         $("body").toggleClass("hideScrollBar");

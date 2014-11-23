@@ -10,17 +10,20 @@ html
     link(rel="stylesheet", href="style.css")
     //- Jquery
     script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
-    script(src="scripts/waypoints.min.js")
+    script(src="scripts/jquery-plugins/waypoints.min.js")
     //- Underscore
     script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
     //- Prismjs
-    script(src="scripts/prism.js")
+    script(src="scripts/lib/prism.js")
+    //- Hashchange
+    script(src="scripts/jquery-plugins/hashchange.js")
     //- Intialization and global values
     script.
       window.export = {};
       window.export.globals = !{JSON.stringify(globals)};
     //- Custom Scripts
     script(src="scripts/syntaxHighlighting.js")
+    script(src="scripts/hashHandler.js")
     script(src="scripts/editor.js")
     script(src="scripts/sidenav.js")
     script(src="scripts/nav.js")

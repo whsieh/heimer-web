@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
     Prism.languages.instaparse = {
         "comment": /#.*/g,
         "tag": /<head>|<objects>|<body>/g,
