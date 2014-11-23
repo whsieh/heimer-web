@@ -14,6 +14,13 @@ $(document).ready(function() {
         return false;
     });
 
+    // Use button click
+    $("#use").click(function (e) {
+        window.toggleEditor();
+        
+        return false;
+    });
+
     // Controlling popup bubbles
     $("#github-popup,#download-popup,#use-popup").hide();
 

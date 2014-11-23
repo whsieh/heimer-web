@@ -7,12 +7,18 @@ $(document).ready(function() {
         });
     }
 
+    var toggleEditor = function() {
+        isEditorOpen = !isEditorOpen;
+        $("#editor").toggle();
+        toggleScroll();
+    }
+
+    window.toggleEditor = toggleEditor;
+
     $(window).keypress(function(e) {
         var code = e.keyCode || e.which;
         if (code == 101) {
-            isEditorOpen = !isEditorOpen;
-            $("#editor").toggle();
-            toggleScroll();
+            window.toggleEditor();
         }
     });
 });
