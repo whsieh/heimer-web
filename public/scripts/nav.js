@@ -1,6 +1,14 @@
 $(function() {
+    //============================================================
+    // Nav setup
+    //============================================================
+
     // Offset the navbar height
     var topOffset = $("#navbar").innerHeight();
+
+    //============================================================
+    // Nav event handlers
+    //============================================================
 
     // Animation for brand click
     $("#brand a").click(function (e) {
@@ -16,9 +24,13 @@ $(function() {
 
     // Use button click
     $("#use").click(function (e) {
-        window.export.editor.toggleEditor();
+        window.exports.editor.toggleEditor();
         return false;
     });
+
+    //============================================================
+    // Nav popup bubble handlers
+    //============================================================
 
     // Controlling popup bubbles
     $("#github-popup,#download-popup,#use-popup").hide();

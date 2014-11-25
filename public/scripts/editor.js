@@ -1,41 +1,42 @@
 $(function() {
-    // Append code editor
-    var editor = CodeMirror($("#code-panel .content")[0], {
-            lineWrapping: true,
-            lineNumbers: true,
-            styleActiveLine: true,
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-spacegutter"]
-        });
+    
+    //============================================================
+    // Editor initialization
+    //============================================================
 
-    // Handler for languages button
-    $("#language .subitems").hide();
-    $("#language").hover(function (e) {
-        $("#language .subitems").toggle();
+    var editor = CodeMirror($("#code-panel .content")[0], {
+        theme: "neo",
+        mode: "python",
+        lineWrapping: true,
+        lineNumbers: true,
+        autofocus: true,
+        indentUnit: 4,
+        styleActiveLine: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-spacegutter"]
     });
 
-    // Handler for handling text pasting in the editor
-    // $("#code-panel .content pre").on("paste", function(e) {
-    //     var text = "";
-    //     if (e.clipboardData)
-    //         text = e.clipboardData.getData('text/plain');
-    //     else if (window.clipboardData)
-    //         text = window.clipboardData.getData('Text');
-    //     else if (e.originalEvent.clipboardData)
-    //         text = $('<div></div>').text(e.originalEvent.clipboardData.getData('text'))
-    //     document.execCommand('insertHTML', false, $(text).html());
-    //     return false;
-    // });
-
-    
-
-    // Export editor util functions
-    window.export.editor = {};
+    //============================================================
+    // Editor API
+    //============================================================
+    window.exports.editor = {};
 
     var isEditorOpen = false;
+
+    //------------------------------------------------------------
+    // Determine if editor is open or not
+    //------------------------------------------------------------
+
+    var isOpen = function() {
+        return isEditorOpen;
+    };
+
+    //------------------------------------------------------------
+    // Toggle the editor
+    //------------------------------------------------------------
     var toggleScroll = function() {
         $("body").toggleClass("hideScrollBar");
-        // Handle removing editor
-    }
+        // TODO: Handle background scrolling
+    };
 
     var toggleEditor = function() {
         isEditorOpen = !isEditorOpen;
@@ -45,15 +46,28 @@ $(function() {
             editor.refresh();
             editor.focus();
         }
-    }
+    };
 
-    window.export.editor.toggleEditor = toggleEditor;
+    window.exports.editor.isOpen = isOpen;
+    window.exports.editor.toggleEditor = toggleEditor;
 
-    // HACKHACK TO BE REMOVED
-    $(window).keypress(function(e) {
-        var code = e.keyCode || e.which;
-        if (code == 92) {
-            window.export.editor.toggleEditor();
+    //============================================================
+    // Editor nav handlers
+    //============================================================
+
+    // Handler for languages button
+    $("#language .subitems").hide();
+    $("#language").hover(function (e) {
+        $("#language .subitems").toggle();
+    });
+
+    // Handler for key presses
+    $(document).keyup(function (e) {
+        var key = e.which;
+        // on ESC quit editor
+        if (key == 27) {
+            if (isEditorOpen)
+                toggleEditor();
         }
     });
 });

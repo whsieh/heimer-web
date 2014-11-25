@@ -35,7 +35,7 @@ var languages = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content"
 var globals = {languages: languages};
 
 /* GET home page. */
-router.get("/", function(req, res) {
+router.get(["/", "/editor"], function(req, res) {
   res.render("index", { title: "InstaParse", sections: sections, languages: languages, globals: globals });
 });
 

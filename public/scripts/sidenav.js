@@ -1,4 +1,9 @@
 $(function() {
+
+    //============================================================
+    // Sidenav setup
+    //============================================================
+
     // Offset the navbar height
     var topOffset = $("#navbar").innerHeight();
 
@@ -17,7 +22,10 @@ $(function() {
         });
     });
 
-    // Helpers
+    //============================================================
+    // Helper functions
+    //============================================================
+
     var scrollToSection = function(itemToScrollTo) {
         var scrollFrom = $(document).scrollTop();
         var scrollTo = itemToScrollTo.offset().top - topOffset;
@@ -25,7 +33,11 @@ $(function() {
         $("html, body").animate({
             scrollTop: scrollTo
         }, Math.abs(scrollTo - scrollFrom) / 1.75);
-    }
+    };
+
+    //============================================================
+    // Sidenav event handlers
+    //============================================================
 
     // Handle a sidenav click
     $(".item a,.subitem a").click(function (e) {
@@ -33,6 +45,10 @@ $(function() {
         scrollToSection(anchor.data("other"));
         return false;
     });
+
+    //============================================================
+    // Sidenav selector handlers
+    //============================================================
 
     // Handle scroll events
     var prevNavAnchor = $();
@@ -65,7 +81,7 @@ $(function() {
 
         prevNavAnchor = navAnchor;
         prevSection = section;
-    }
+    };
 
     $("#content").find("h1,h2").waypoint(function(direction) {
         // Scrolling down

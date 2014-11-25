@@ -6,8 +6,9 @@ html
     //- Stylesheets
     link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Open+Sans:300")
     link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css")
-    link(rel="stylesheet", href="styles/prism.css")
     link(rel="stylesheet", href="styles/codemirror.css")
+    link(rel="stylesheet", href="styles/neo.css")
+    link(rel="stylesheet", href="styles/solarized.css")
     link(rel="stylesheet", href="style.css")
     //- Jquery
     script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
@@ -16,17 +17,20 @@ html
     script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
     //- Codemirror
     script(src="scripts/lib/codemirror.js")
-    script(src="scripts/lib/javascript.js")
     script(src="scripts/lib/active-line.js")
+    script(src="scripts/lib/clike.js")
+    script(src="scripts/lib/python.js")
     //- Intialization and global values
     script.
-      window.export = {};
-      window.export.globals = !{JSON.stringify(globals)};
+      window.exports = {};
+      window.exports.globals = !{JSON.stringify(globals)};
     //- Custom Scripts
-    script(src="scripts/syntaxHighlighting.js")
+    script(src="scripts/setup.js")
     script(src="scripts/editor.js")
+    script(src="scripts/stateHandler.js")
     script(src="scripts/sidenav.js")
     script(src="scripts/nav.js")
+
 
   body.language-instaparse
     block content
