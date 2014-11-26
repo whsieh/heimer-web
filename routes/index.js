@@ -43,6 +43,11 @@ router.get(["/", "/editor"], function(req, res) {
 /* GET code generation. */
 router.get("/gencode", function(req, res) {
     var language = req.query.language;
+    if (language.toLowerCase() != "java" && language.toLowerCase() != "c++" && language.toLowerCase() != "python") {
+        console.log("Invalid language detected.");
+        res.send({"error": "Invalid language"});
+        return;
+    }
     console.log("\nThe client input is: " + req.query.input);
     console.log("The language is: " + req.query.language);
 

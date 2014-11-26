@@ -22,6 +22,7 @@ def main():
         jsonResult[sourceName] = urllib.quote(sourceFile.read(), safe="~@#$&()*!+=:;,.?/\'")
         sourceFile.close()
     print json.dumps(jsonResult)
+    os.popen("rm -rf tmp/*")
 
 if __name__ == "__main__":
     try:
