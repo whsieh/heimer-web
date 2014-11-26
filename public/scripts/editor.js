@@ -6,7 +6,7 @@ $(function() {
 
     var editor = CodeMirror($("#code-panel .content")[0], {
         theme: "neo",
-        mode: "python",
+        mode: "instaparse",
         lineWrapping: true,
         lineNumbers: true,
         autofocus: true,

@@ -8,7 +8,7 @@ $(function() {
 
     $code.each(function(index, element) {
         var $element = $(element);
-        var mode = "python";
+        var mode = "instaparse";
         if ($element.attr("lang"))
             mode = $element.attr("lang");
         var content = $.trim($(element).text());
@@ -18,11 +18,26 @@ $(function() {
         }, {
             value: content,
             mode: mode,
-            theme: "solarized dark",
+            theme: "solarized light",
             lineWrapping: true,
             lineNumbers: true,
             readOnly: "nocursor",
             gutters: ["CodeMirror-linenumbers", "CodeMirror-spacegutter"]
+        });
+    });
+
+    var $vs = $("#content .vs");
+
+
+
+
+    $vs.each(function(index, element) {
+        var height = Math.max.apply(Math, $(element).children().map(function() {
+            return $(this).height();
+        }));
+
+        $(element).children().map(function() {
+            $(this).height(height);
         });
     });
 

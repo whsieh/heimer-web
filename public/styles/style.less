@@ -300,6 +300,8 @@ a {
     padding: 5px 0px;
     z-index: -1;
     margin-bottom: 15px;
+    // Turn off strange box shadows
+    box-shadow: none;
   }
 
   .CodeMirror-gutters {
@@ -316,7 +318,7 @@ a {
 
     .CodeMirror {
       &:first-of-type {
-        border-right: 2px dashed;
+        border-right: 2px solid rgba(101, 123, 131, 0.25);
         float: left;
       }
       width: calc(~"50% - 1px");
@@ -502,5 +504,23 @@ pre {
 
   .CodeMirror-spacegutter {
     width: 5px;
+  }
+}
+
+// Change syntax highlighting for editor to match webpage
+.cm-s-neo ,.cm-s-solarized {
+  .cm-comment {color: #586e75; font-style:italic; }
+  .cm-string { color: #859900; }
+  .cm-number { color: #d33682; }
+  .cm-header { color: #586e75; }
+  .cm-header { color: #586e75; }
+  .cm-def { color: #2aa198; }
+  .cm-variable { color: #268bd2; }
+  .cm-builtin { color: #d33682; }
+  .cm-operator {color: #6c71c4;}
+  .cm-keyword { color: #cb4b16 }
+  .cm-error {
+    color: #586e75;
+    border-bottom: 1px dotted #dc322f;
   }
 }
