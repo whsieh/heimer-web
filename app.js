@@ -6,10 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLess = require('express-less');
 var routes = require('./routes/index');
-
-/* Required to run instaparse on the server. */
-var childProcess = require("child_process")
-
 var app = express();
 
 // view engine setup
@@ -26,7 +22,6 @@ app.use(expressLess(path.join(__dirname, 'public', 'styles')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,29 +53,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-function syscall( commandString, handleSuccess, handleError) {
-    if (handleSuccess == undefined) {
-        handleSuccess = function( output, command ) {
-            console.log(output);
-        }
-    }
-    if (handleError == undefined) {
-        handleError = function( errorString, command ) {
-            console.log("Error when running " + command + ": " + errorString);
-        }
-    }
-    childProcess.exec(commandString, function(error, stdout, stderr) {
-        if (error) {
-            console.log("Error: failed to execute system call \"" + commandString + "\"(" + error + ")");
-            return;
-        }
-        errorString = stderr.toString();
-        if (errorString)
-            handleError(errorString);
-        else
-            handleSuccess(stdout.toString());
-    });
-}
 
 module.exports = app;
