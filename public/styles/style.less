@@ -410,6 +410,17 @@ pre {
         }
       }
 
+      // Small hack to fix scrolling issue
+      &:after {
+        content: "";
+        position: absolute;
+        top: 35px; left: -2px;
+        width: 120px; height: 1px;
+        background-color: red;
+        z-index: 90;
+        opacity: 0;
+      }
+
       .subitems {
         position: absolute;
         top: 36px; left: -2px;
