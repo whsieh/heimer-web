@@ -31,6 +31,14 @@ $(function() {
     };
 
     //------------------------------------------------------------
+    // Determine if editor is open or not
+    //------------------------------------------------------------
+
+    var language = function() {
+        return $("#language .dropdown").text();
+    }
+
+    //------------------------------------------------------------
     // Toggle the editor
     //------------------------------------------------------------
     var toggleScroll = function() {
@@ -49,6 +57,7 @@ $(function() {
     };
 
     window.exports.editor.isOpen = isOpen;
+    window.exports.editor.language = language;
     window.exports.editor.toggleEditor = toggleEditor;
 
     //============================================================
@@ -59,6 +68,16 @@ $(function() {
     $("#language .subitems").hide();
     $("#language").hover(function (e) {
         $("#language .subitems").toggle();
+    });
+    $("#language .subitems").click(function(e) {
+        $("#language .subitems").toggle();
+        var newLanguage = $(e.target).text();
+        $("#language .dropdown").text(newLanguage)
+        $("#language .subitems .subitem").remove();
+        _.each(window.exports.globals.languages, function(language) {
+            if (language == newLanguage) return;
+            $("<div>").addClass("subitem").text(language).appendTo("#language .subitems");
+        });
     });
 
     // Handler for key presses
