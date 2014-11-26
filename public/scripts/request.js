@@ -25,18 +25,5 @@ $(document).ready(function() {
             }
         });
     }
-    window.gencode = gencode;
+    window.exports.gencode = gencode;
 });
-
-var testFormat = "<head>\n\
-delimiter \",\"\n\
-\n\
-<objects>\n\
-Adjacency\n\
-    vertex:int neighbors:list(int)\n\
-Graph\n\
-    name:string\n\
-    adjacencies:Adjacency:+\n\
-    \n\
-<body>\n\
-graphs:Graph:+!";

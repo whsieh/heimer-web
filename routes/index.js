@@ -3,12 +3,12 @@ var router = express.Router();
 
 var path = require("path");
 var fs = require("fs");
+var util = require("../util");
 
 
 // Grab the sections to automatically generate the navigation
 var order = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content", "order.json")));
 var sections = [];
-var util = require("../util");
 
 order.files.forEach(function(file) {
     if (!("name" in file || "filename" in file)) {
@@ -40,6 +40,7 @@ router.get(["/", "/editor"], function(req, res) {
   res.render("index", { title: "InstaParse", sections: sections, languages: languages, globals: globals });
 });
 
+/* GET code generation. */
 router.get("/gencode", function(req, res) {
     var language = req.query.language;
     console.log("\nThe client input is: " + req.query.input);
