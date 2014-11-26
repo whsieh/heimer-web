@@ -28,9 +28,6 @@ $(function() {
 
     var $vs = $("#content .vs");
 
-
-
-
     $vs.each(function(index, element) {
         var height = Math.max.apply(Math, $(element).children().map(function() {
             return $(this).height();

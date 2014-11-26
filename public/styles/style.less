@@ -87,6 +87,7 @@ a {
   position: fixed;
   left: 50%;
   .translateX(-50%);
+  z-index: 80;
 
   background-color: white;
   font-family: HelveticaNeue;
@@ -298,7 +299,6 @@ a {
     width: 100%;
     height: 100%;
     padding: 5px 0px;
-    z-index: -1;
     margin-bottom: 15px;
     // Turn off strange box shadows
     box-shadow: none;
@@ -315,14 +315,13 @@ a {
   .vs {
     width: 100%;
     margin: 0 auto;
-    display: flex;
-    display: -webkit-box;
 
     .CodeMirror {
       &:first-of-type {
         border-right: 2px solid rgba(101, 123, 131, 0.25);
+        float: left;
       }
-      width: calc(~"50% - 1px");
+      width: calc(~"50% - 2px");
       height: 100%;
     }
   }
@@ -363,7 +362,7 @@ pre {
   min-width: 1000px;
   min-height: 500px;
   padding: 30px;
-  z-index: 5;
+  z-index: 90;
   background-color: white;
 }
 
@@ -446,7 +445,7 @@ pre {
     color: @dark;
     .onHover;
     .subitems {
-      z-index: 10;
+      z-index: 100;
     }
   }
 
