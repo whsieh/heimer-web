@@ -455,7 +455,8 @@ pre {
 
   nav #language {
     left: 0; top: 0;
-    background-color: @gray;
+    background-color: white;
+    border-bottom: white;
     color: @dark;
     .onHover;
     .subitems {
@@ -504,6 +505,20 @@ pre {
     background-color: @dark;
     color: @light;
     .onHover;
+  }
+
+  nav .output {
+    position: initial;
+    display: inline-block;
+    margin-right: 10px;
+    background-color: white;
+    color: @dark;
+    &:not(.selected) {
+      .onHover;  
+    }
+    &.selected {
+      border-bottom: white;
+    }
   }
 }
 

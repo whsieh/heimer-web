@@ -56,9 +56,35 @@ $(function() {
         }
     };
 
+    //------------------------------------------------------------
+    // Clear output nav
+    //------------------------------------------------------------
+
+    var clearOutputNav = function() {
+        
+    };
+
+    //------------------------------------------------------------
+    // Add output tab
+    //------------------------------------------------------------
+
+    var addOutput = function(filename, content) {
+        
+    }
+
+    //------------------------------------------------------------
+    // Add output dropdown tab
+    //------------------------------------------------------------    
+
+    var addOutputDropdown = function(filenames, contents) {
+
+    }
+
     window.exports.editor.isOpen = isOpen;
     window.exports.editor.language = language;
     window.exports.editor.toggleEditor = toggleEditor;
+    window.exports.editor.clearOutputNav = clearOutputNav;
+    window.exports.editor.addOutputDropdown = addOutputDropdown;
 
     //============================================================
     // Editor nav handlers
