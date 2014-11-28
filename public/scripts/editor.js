@@ -98,7 +98,7 @@ $(function() {
     $("#language .subitems").click(function(e) {
         $("#language .subitems").toggle();
         var newLanguage = $(e.target).text();
-        $("#language .dropdown").text(newLanguage)
+        $("#language .text").text(newLanguage)
         $("#language .subitems .subitem").remove();
         _.each(window.exports.globals.languages, function(language) {
             if (language == newLanguage) return;

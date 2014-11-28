@@ -38,8 +38,8 @@ block content
   #editor
     #code-panel
       nav
-        #language.tab
-          .dropdown= languages[0]
+        #language.tab.dropdown
+          .text= languages[0]
           .subitems
             each language, index in languages
               if (index !== 0)
@@ -60,7 +60,12 @@ block content
     #output-panel
       nav
         .output.tab Main.java
-        .output.tab.selected Util.java
+        .output.tab Util.java
+        .output.tab.dropdown.selected
+          .text Classes
+          .subitems
+            .subitem One.java
+            .subitem Two.java
         #downloadOutput.tab Download
       .content.borderBox
 

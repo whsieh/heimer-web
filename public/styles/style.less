@@ -165,6 +165,7 @@ a {
     }
   }
 
+  // Magic numbers to position popups
   #download-popup {
     left: 225px;
     &:before {
@@ -344,6 +345,20 @@ pre {
 }
 
 //-------------------------------------------------------------
+// Editor sizing variables
+//-------------------------------------------------------------
+
+@editorPadding: 30px;
+@editorPanelSeparation: 20px;
+@editorMinWidth: 1100px;
+@editorMinHeight: 500px;
+@editorNavIndent: 25px;
+@editorTabHeight: 35px;
+@editorTabWidth: 110px;
+@editorTabSpacing: 10px;
+@editorBorderWidth: 2px;
+
+//-------------------------------------------------------------
 // Editor Navigation
 //-------------------------------------------------------------
 
@@ -356,15 +371,22 @@ pre {
   }
 }
 
+// Handle truncation of text
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #editor {
   display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  min-width: 1000px;
-  min-height: 500px;
-  padding: 30px;
+  min-width: @editorMinWidth;
+  min-height: @editorMinHeight;
+  padding: @editorPadding;
   z-index: 90;
   background-color: white;
 }
@@ -372,67 +394,78 @@ pre {
 #code-panel, #output-panel {
   display: inline-block;
   vertical-align: top;
-  width: calc(~"50% - 40px");
-  height: calc(~"100% - 60px");
-  margin-right: 20px;
+  width: calc(~"50%" - (@editorPadding + @editorPanelSeparation/2));
+  height: calc(~"100%" - 2 * @editorPadding);
 
   nav {
     position: relative;
-    margin-left: 25px;
-    height: 35px;
+    margin-left: @editorNavIndent;
+    height: @editorTabHeight;
 
     font-family: "Open Sans";
     font-weight: 300;
     font-size: 16px;
 
     .tab {
-      position: absolute;
+      display: inline-block;
       box-sizing: border-box;
-      width: 100px;
-      height: 37px;
-      border: 2px solid @gray;
+      position: relative;
+      min-width: @editorTabWidth; 
+      max-width: calc(~"25%" - 3/4 * @editorTabSpacing);
+      height: @editorTabHeight + @editorBorderWidth;
+      padding: 0 10px;
+      margin-right: @editorTabSpacing;
+      vertical-align: bottom;
 
+      border: @editorBorderWidth solid @gray;
       text-align: center;
-      line-height: 35px;
+      line-height: @editorTabHeight;
 
-      .dropdown {
-        box-sizing: border-box;
-        display: inline-block;
-        width: 96px;
-        padding-right: 10px;
+      &:not(.dropdown) {
+        .truncate;
+      }
 
+      &.dropdown {
+        .text {
+          display: inline-block;
+          box-sizing: border-box;
+          min-width: 100%;
+          max-width: 100%;
+          padding-right: 15px;
+          text-align: center;
+          .truncate;
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: 12px; right: 4px;
+            border-width: 10px 6px 0;
+            border-style: solid;
+            border-color: @dark transparent;  
+          }
+        }
+
+        // Small hack to fix scrolling issue
         &:after {
           content: "";
-          display: inline-block;
           position: absolute;
-          left: 75px;
-          top: 13px;
-          border-width: 10px 6px 0;
-          border-style: solid;
-          border-color: @dark transparent;  
+          top: @editorTabHeight; left: 0;
+          width: @editorTabWidth + 20px; height: 1px;
+          background-color: red;
+          z-index: 90;
+          opacity: 0;
         }
-      }
-
-      // Small hack to fix scrolling issue
-      &:after {
-        content: "";
-        position: absolute;
-        top: 35px; left: -2px;
-        width: 120px; height: 1px;
-        background-color: red;
-        z-index: 90;
-        opacity: 0;
-      }
+      } 
 
       .subitems {
         position: absolute;
-        top: 36px; left: -2px;
-        min-width: 120px;
+        top: @editorTabHeight + 1px; left: 0px;
+        min-width: @editorTabWidth + 20px;
         background-color: white;
-        border: 2px solid @gray;
+        border: @editorBorderWidth solid @gray;
         
         .subitem {
-          height: 37px;
+          height: @editorTabHeight + @editorBorderWidth;
           .onHover;
         }
       }
@@ -440,21 +473,24 @@ pre {
   }
 
   .content {
-    height: calc(~"100% - 35px");
-    border: 2px solid @gray;
+    height: calc(~"100%" - @editorTabHeight);
+    border: @editorBorderWidth solid @gray;
   }
 }
 
 #code-panel {
+  margin-right: @editorPanelSeparation;
+
   nav #compile {
+    position: absolute;
     right: 0; top: 0;
+    margin: 0;
     background-color: @dark;
     color: @light;
     .onHover;
   }
 
   nav #language {
-    left: 0; top: 0;
     background-color: white;
     border-bottom: white;
     color: @dark;
@@ -465,8 +501,9 @@ pre {
   }
 
   nav #template {
-    position: absolute;
-    left: 125px; bottom: 7px;
+    display: inline-block;
+    position: relative;
+    left: 10px; bottom: 5px;
     width: 135px; height: 20px;
     border: 1px solid @dark;
 
@@ -501,16 +538,15 @@ pre {
 
 #output-panel {
   nav #downloadOutput {
+    position: absolute;
     right: 0; top: 0;
+    margin: 0;
     background-color: @dark;
     color: @light;
     .onHover;
   }
 
   nav .output {
-    position: initial;
-    display: inline-block;
-    margin-right: 10px;
     background-color: white;
     color: @dark;
     &:not(.selected) {
