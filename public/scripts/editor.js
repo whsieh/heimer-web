@@ -47,7 +47,7 @@ $(function() {
         // on ESC quit editor
         if (key == 27) {
             if (isEditorOpen)
-                toggleEditor();
+                window.exports.editor.toggleEditor();
         }
     });
 
