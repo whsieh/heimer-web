@@ -136,9 +136,6 @@ a {
       border-width: 0 8px 7px;
       border-style: solid;
       border-color: @hover transparent;
-      /* reduce the damage in FF3.0 */
-      display:block;
-      width:0;
     }
 
     &:after {
@@ -151,9 +148,6 @@ a {
       border-width: 0 7px 6px;
       border-style: solid;
       border-color: white transparent;
-      /* reduce the damage in FF3.0 */
-      display:block;
-      width:0;
     }
 
     p {
@@ -353,8 +347,9 @@ pre {
 @editorMinWidth: 1100px;
 @editorMinHeight: 500px;
 @editorNavIndent: 25px;
+@editorNavMinWidth: (@editorMinWidth - @editorPanelSeparation)/2 - @editorPadding - @editorNavIndent;
 @editorTabHeight: 35px;
-@editorTabWidth: 110px;
+@editorTabMinWidth: 110px;
 @editorTabSpacing: 10px;
 @editorBorderWidth: 2px;
 
@@ -410,22 +405,32 @@ pre {
       display: inline-block;
       box-sizing: border-box;
       position: relative;
-      min-width: @editorTabWidth; 
-      max-width: calc(~"25%" - 3/4 * @editorTabSpacing);
+      min-width: @editorTabMinWidth; 
+      max-width: (@editorNavMinWidth - 3 * @editorTabSpacing)/4;
       height: @editorTabHeight + @editorBorderWidth;
+      z-index: 90;
       padding: 0 10px;
       margin-right: @editorTabSpacing;
       vertical-align: bottom;
 
+      background-color: white;
       border: @editorBorderWidth solid @gray;
+      color: @dark;
       text-align: center;
       line-height: @editorTabHeight;
 
+      &:not(.selected) {
+        .onHover;
+      }
       &:not(.dropdown) {
         .truncate;
       }
+      &.selected {
+        border-bottom: white;
+      }
 
       &.dropdown {
+        .onHover;
         .text {
           display: inline-block;
           box-sizing: border-box;
@@ -450,9 +455,8 @@ pre {
           content: "";
           position: absolute;
           top: @editorTabHeight; left: 0;
-          width: @editorTabWidth + 20px; height: 1px;
-          background-color: red;
-          z-index: 90;
+          width: @editorTabMinWidth + 20px; height: 1px;
+          z-index: 100;
           opacity: 0;
         }
       } 
@@ -460,21 +464,54 @@ pre {
       .subitems {
         position: absolute;
         top: @editorTabHeight + 1px; left: 0px;
-        min-width: @editorTabWidth + 20px;
+        min-width: @editorTabMinWidth + 20px;
+        max-width: @editorTabMinWidth * 2;
         background-color: white;
         border: @editorBorderWidth solid @gray;
+        z-index: 100;
         
         .subitem {
+          display: inline-block;
+          position: relative;
+          box-sizing: border-box;
+          min-width: 100%;
+          max-width: 100%;
           height: @editorTabHeight + @editorBorderWidth;
+          padding: 0 20px 0 5px;
+          vertical-align: top;
+          .truncate;
           .onHover;
+
+          &.selected {
+            background-color: @light;
+
+            &:after {
+              content: "";
+              position: absolute;
+              right: 4px; top: 12px;
+              background-color: @dark;
+              border-radius: 50%;
+              height: 10px; width : 10px;
+              margin: 0;
+            }
+          }
         }
       }
     }
   }
 
   .content {
+    position: relative;
     height: calc(~"100%" - @editorTabHeight);
     border: @editorBorderWidth solid @gray;
+  }
+
+  .CodeMirror {
+    width: 100%; height: 100%;
+  }
+
+  .CodeMirror-spacegutter {
+    width: 5px;
   }
 }
 
@@ -488,16 +525,6 @@ pre {
     background-color: @dark;
     color: @light;
     .onHover;
-  }
-
-  nav #language {
-    background-color: white;
-    border-bottom: white;
-    color: @dark;
-    .onHover;
-    .subitems {
-      z-index: 100;
-    }
   }
 
   nav #template {
@@ -537,6 +564,7 @@ pre {
 }
 
 #output-panel {
+
   nav #downloadOutput {
     position: absolute;
     right: 0; top: 0;
@@ -546,31 +574,15 @@ pre {
     .onHover;
   }
 
-  nav .output {
-    background-color: white;
-    color: @dark;
-    &:not(.selected) {
-      .onHover;  
-    }
-    &.selected {
-      border-bottom: white;
-    }
+  .CodeMirror {
+    position: absolute;
+    top: 0; left: 0;
   }
 }
 
 //-------------------------------------------------------------
 // Code editor
 //-------------------------------------------------------------
-
-#code-panel {
-  .CodeMirror {
-    width: 100%; height: 100%;
-  }
-
-  .CodeMirror-spacegutter {
-    width: 5px;
-  }
-}
 
 // Change syntax highlighting for editor to match webpage
 .cm-s-neo ,.cm-s-solarized {

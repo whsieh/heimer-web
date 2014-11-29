@@ -38,12 +38,14 @@ block content
   #editor
     #code-panel
       nav
-        #language.tab.dropdown
+        #language.tab.dropdown.selected
           .text= languages[0]
           .subitems
             each language, index in languages
               if (index !== 0)
                 .subitem= language
+              else
+                .subitem.selected= language
         #template.borderBox
           select
             option(value="one") Option 1
@@ -59,13 +61,13 @@ block content
 
     #output-panel
       nav
-        .output.tab Main.java
-        .output.tab Util.java
-        .output.tab.dropdown.selected
-          .text Classes
-          .subitems
-            .subitem One.java
-            .subitem Two.java
+        //- .output.tab Main.java
+        //- .output.tab Util.java
+        //- .output.tab.dropdown.selected
+        //-   .text Classes
+        //-   .subitems
+        //-     .subitem.selected One.java
+        //-     .subitem Two.java
         #downloadOutput.tab Download
       .content.borderBox
 
