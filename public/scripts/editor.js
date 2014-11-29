@@ -4,9 +4,13 @@ $(function() {
     // Editor initialization
     //============================================================
 
+    if (!$.cookie("format"))
+        $.cookie("format", "", window.exports.cookieConfig);
+
     var editor = CodeMirror($("#code-panel .content")[0], {
         theme: "neo",
         mode: "instaparse",
+        value: $.cookie("format"),
         lineWrapping: true,
         lineNumbers: true,
         autofocus: true,
@@ -14,6 +18,15 @@ $(function() {
         styleActiveLine: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-spacegutter"]
     });
+
+    var save = function() {
+        $.cookie("format", editor.getDoc().getValue(), window.exports.cookieConfig);
+    };
+
+    // Update editor cookie every 20 seconds
+    window.setInterval(function() {
+        save();
+    }, 20000);
 
 
     //============================================================
@@ -46,8 +59,18 @@ $(function() {
         var key = e.which;
         // on ESC quit editor
         if (key == 27) {
-            if (isEditorOpen)
+            if (window.exports.editor.isOpen())
                 window.exports.editor.toggleEditor();
+            return false;
+        }
+    });
+
+    $(document).keydown(function (e) {
+        var key = e.which;
+        // on ctrl+s or meta+s save the content
+        if (String.fromCharCode(key).toLowerCase() == 's' && (e.ctrlKey || e.metaKey) || (key == 19)) {
+            save();
+            return false;
         }
     });
 
