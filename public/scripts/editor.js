@@ -95,7 +95,7 @@ $(function() {
     //------------------------------------------------------------
 
     var language = function() {
-        return $("#language .dropdown").text();
+        return $("#language .text").text().toLowerCase();
     }
 
     //------------------------------------------------------------
@@ -254,9 +254,11 @@ $(function() {
         $(element).click();
     }
 
+    window.exports.editor.getContent = editor.getDoc().getValue.bind(editor.getDoc());
     window.exports.editor.isOpen = isOpen;
-    window.exports.editor.language = language;
+    window.exports.editor.getLanguage = language;
     window.exports.editor.toggleEditor = toggleEditor;
+    window.exports.editor.addOutput = addOutput;
     window.exports.editor.clearOutputNav = clearOutputNav;
     window.exports.editor.addOutputDropdown = addOutputDropdown;
     window.exports.editor.selectOutput = selectOutput;

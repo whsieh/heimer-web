@@ -3,8 +3,13 @@ var router = express.Router();
 
 var path = require("path");
 var fs = require("fs");
-var util = require("../util");
+var temp = require("temp");
+var childProcess = require("child_process");
+var rimraf = require("rimraf");
 
+//============================================================
+// Automatically generate webpage content
+//============================================================
 
 // Grab the sections to automatically generate the navigation
 var order = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content", "order.json")));
@@ -35,39 +40,62 @@ var languages = JSON.parse(fs.readFileSync(path.join(__dirname, "../", "content"
 // Setup global variables to pass to the client
 var globals = {languages: languages};
 
+//============================================================
+// Route Handlers
+//============================================================
+
 /* GET home page. */
 router.get(["/", "/editor"], function(req, res) {
   res.render("index", { title: "InstaParse", sections: sections, languages: languages, globals: globals });
 });
 
 /* GET code generation. */
+
+// Helpers for generation
+var onCodegenError = function(res, error) {
+    res.send({error: error});
+};
+
+var onCodegenSuccess = function(res, outputDirectoryName) {
+    var command = "python collect_source.py " + outputDirectoryName + " input.format Main";
+
+    childProcess.exec(command, function(error, stdout, stderr) {
+        if (error) {
+            onCodegenError(res, stderr.toString());
+        } else {
+            res.send(stdout.toString());
+        }
+
+        rimraf(outputDirectoryName, function (error) {
+            if (error) {
+                console.log("Unable to clean temporary directory: " + dirPath);
+            }
+        });
+    });
+};
+
 router.get("/gencode", function(req, res) {
     var language = req.query.language;
-    if (language.toLowerCase() != "java" && language.toLowerCase() != "c++" && language.toLowerCase() != "python") {
-        console.log("Invalid language detected.");
-        res.send({"error": "Invalid language"});
-        return;
-    }
-    console.log("\nThe client input is: " + req.query.input);
-    console.log("The language is: " + req.query.language);
+    var directoryName = "tmp";
 
-    function onCollectSourceSuccess(output, command) {
-        console.log("collect_source executed successfully!");
-        res.send(output);
-    }
-
-    function onCodegenSuccess(output, command) {
-        console.log("instaparse executed successfully!");
-        util.syscall("python collect_source.py tmp input.format", onCollectSourceSuccess);
-    }
-
-    fs.writeFile("tmp/input.format", req.query.input, function(err) {
-        if (err)
-            console.log("Error writing input file: " + err);
-        else {
-            console.log("Successfully wrote tmp/input.format.");
-            util.syscall("python instaparse.py -l " + language + " tmp/input.format -o tmp/out", onCodegenSuccess);
-        }
+    temp.mkdir(directoryName, function(err, dirPath) {
+        var formatFile = path.join(dirPath, "input.format");
+        fs.writeFile(formatFile, req.query.input, function(err) {
+            if (err) {
+                onCodegenError("IO Error. Try again!");
+            } else {
+                var command = "python instaparse.py -l " + language + " " 
+                    + formatFile  + " "
+                    + "-o " + path.join(dirPath, "Main");
+                childProcess.exec(command, function(error, stdout, stderr) {
+                    if (error) {
+                        onCodegenError(res, stderr.toString());
+                    } else {
+                        onCodegenSuccess(res, dirPath);
+                    }
+                });
+            }
+        });
     });
 });
 
