@@ -76,6 +76,14 @@ var onCodegenSuccess = function(res, outputDirectoryName) {
 
 router.get("/gencode", function(req, res) {
     var language = req.query.language;
+    var isLanguageValid = false;
+    languages.forEach(function(knownLanguage) {
+        if (knownLanguage.toLowerCase() == language)
+            isLanguageValid = true;
+    });
+    if (!isLanguageValid)
+        return; // Command injections are bad.
+
     var directoryName = "tmp";
 
     temp.mkdir(directoryName, function(err, dirPath) {
@@ -84,7 +92,7 @@ router.get("/gencode", function(req, res) {
             if (err) {
                 onCodegenError("IO Error. Try again!");
             } else {
-                var command = "python instaparse.py -l " + language + " " 
+                var command = "python instaparse.py -l " + language + " "
                     + formatFile  + " "
                     + "-o " + path.join(dirPath, "Main");
                 childProcess.exec(command, function(error, stdout, stderr) {
