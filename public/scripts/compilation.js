@@ -18,8 +18,6 @@ $(function() {
 
     // Handle compilation click
     $("#compile").click(function() {
-        editor.clearOutputNav();
-
         var formatFile = editor.getContent();
         var language = editor.getLanguage();
 
@@ -28,6 +26,8 @@ $(function() {
                 console.log(result.error);
                 return;
             }
+
+            editor.clearOutputNav();
 
             var editorLanguage = convertLanguageName(language);
 
@@ -48,6 +48,7 @@ $(function() {
                     contents.push(classFileContents);
                     output[classfile.name] = classFileContents;
                 });
+
                 editor.addOutputDropdown(editorLanguage, "Classes", filenames, contents);
             } else {
                 var fileContents = decodeURI(result.data.content);
@@ -61,7 +62,7 @@ $(function() {
         var root = zip.folder("src");
         for (var filename in output)
             root.file(filename, output[filename]);
-
+        
         var content = zip.generate( {type: "blob"} );
         saveToFile(content, "parser.zip");
     });
