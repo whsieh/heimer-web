@@ -14,6 +14,8 @@ $(function() {
     }
 
     $(window).on("popstate", function(e) {
+        if (!e.originalEvent.state)
+            return true;
         if (e.originalEvent.state.id == 0 && editor.isOpen())
             toggleEditor();
         else if (e.originalEvent.state.id == 1 && !editor.isOpen())
