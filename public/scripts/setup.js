@@ -19,7 +19,7 @@ $(function() {
             value: content,
             mode: mode,
             theme: "solarized light",
-            lineWrapping: true,
+            lineWrapping: false,
             lineNumbers: true,
             readOnly: "nocursor",
             gutters: ["CodeMirror-linenumbers", "CodeMirror-spacegutter"]

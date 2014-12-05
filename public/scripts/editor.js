@@ -164,7 +164,7 @@ $(function() {
             theme: "neo",
             value: content,
             mode: language,
-            lineWrapping: true,
+            lineWrapping: false,
             lineNumbers: true,
             readOnly: "nocursor",
             gutters: ["CodeMirror-linenumbers", "CodeMirror-spacegutter"]
