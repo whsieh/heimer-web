@@ -32,7 +32,16 @@ $(function() {
             editor.selectOutput(editor.addOutput(editorLanguage, result.main.name, decodeURI(result.main.content)));
             editor.addOutput(editorLanguage, result.util.name, decodeURI(result.util.content));
             if (result.classes.length != 0) {
+                var filenames = [];
+                var contents = [];
+                _.each(result.classes, function(classfile) {
+                    filenames.push(classfile.name);
+                    contents.push(decodeURI(classfile.content));
+                });
 
+                console.log(filenames, contents);
+
+                editor.addOutputDropdown(editorLanguage, "Classes", filenames, contents);
             } else {
                 editor.addOutput(editorLanguage, result.data.name, decodeURI(result.data.content));
             }
