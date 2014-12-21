@@ -3,7 +3,7 @@ $(function() {
         return encodeURI(input).replace(/&/g, encodeURIComponent("&")).replace(/\+/g, encodeURIComponent("+"));
     }
 
-    var urlStringPrefix = "http://localhost:8000/gencode?language=";
+    var urlStringPrefix = "http://instaparser.herokuapp.com/gencode?language=";
     var gencode = function(language, input, handleFinished) {
         $.ajax({
             url: urlStringPrefix + encodeUserInput(language) + "&input=" + encodeUserInput(input),
