@@ -4,9 +4,9 @@ import os
 import sys
 
 def usage():
-    print "Usage: python collect_source.py <dir> <formatfile>"
+    print "Usage: python collect_source.py <dir> <formatName> <mainName>"
     print "    <dir> is the directory under which the source files exist"
-    print "    <formatfile> is the name of the format file"
+    print "    <formatName> is the name of the format file"
     print "    <mainName> the name of the main file"
 
 def main():
@@ -35,7 +35,7 @@ def main():
             jsonResult["data"] = {"name": sourceName, "content": urllib.quote(sourceFile.read(), safe="~@#$&()*!+=:;,.?/\'")}
         else:
             jsonResult["classes"].append({"name": sourceName, "content": urllib.quote(sourceFile.read(), safe="~@#$&()*!+=:;,.?/\'")})
-            
+
         sourceFile.close()
     print json.dumps(jsonResult)
 

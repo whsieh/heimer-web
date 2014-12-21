@@ -1,7 +1,7 @@
 $(function() {
 
     // Define instaparse syntax highlighting
-    CodeMirror.defineSimpleMode("instaparse", { 
+    CodeMirror.defineSimpleMode("instaparse", {
         start: [
             {
                 regex: /#.*/g,

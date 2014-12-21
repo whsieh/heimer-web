@@ -31,8 +31,8 @@ $(function() {
 
             var editorLanguage = convertLanguageName(language);
 
-            var mainFileContents = decodeURI(result.main.content)
-            var utilFileContents = decodeURI(result.util.content)
+            var mainFileContents = decodeURI(result.main.content);
+            var utilFileContents = decodeURI(result.util.content);
             editor.selectOutput(editor.addOutput(editorLanguage, result.main.name, mainFileContents));
             editor.addOutput(editorLanguage, result.util.name, utilFileContents);
             output = {}
@@ -51,8 +51,8 @@ $(function() {
                 editor.addOutputDropdown(editorLanguage, "Classes", filenames, contents);
             } else {
                 var fileContents = decodeURI(result.data.content);
-                editor.addOutput(editorLanguage, result.data.name, dataFileContents);
-                output[result.data.name] = dataFileContents;
+                editor.addOutput(editorLanguage, result.data.name, fileContents);
+                output[result.data.name] = fileContents;
             }
         });
     });
